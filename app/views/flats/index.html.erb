@@ -1,0 +1,38 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">Simple Airbnb</a>
+    <form class="d-flex">
+      <button class="btn btn-outline-success"><%= link_to "Add a flat", new_flat_path, style: 'text-decoration: none;' %>
+</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+<h1>ALL THE FLATS (<%= @flats.count %>)</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @flats.each do |flat| %>
+     <div class="col">
+    <div class="card h-100">
+      <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= flat.name  %></h5>
+        <p class="card-text"><%= flat.address %></p>
+        <span class="guests">
+          <i class="fas fa-user"></i> <%= flat.number_of_guests %>
+        </span>
+        <span class="price">
+          <i class="fas fa-pound-sign"></i> <%= flat.price_per_night %>
+        </span>
+      </div>
+      <div class="card-footer">
+      <%# A remplacer par des link to %>
+        <%= link_to "More infos", flat_path(flat) %>
+        <%= link_to "Edit", edit_flat_path(flat), class: 'text-warning' %>
+        <%= link_to "Remove", flat_path(flat), data: {turbo_method: :delete, turbo_confirm: "Confirm?"}, class: 'text-danger'%>
+      </div>
+    </div>
+  </div>
+    <% end %>
+  </div>
+</div>
